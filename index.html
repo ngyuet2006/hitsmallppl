@@ -1634,6 +1634,361 @@
   }
 }
 
+  
+
+    /* ==========================================================================
+       分頁與冰封詛咒頁
+       ========================================================================== */
+    .tab-switch-btn {
+      flex: 1;
+      border-radius: 9999px;
+      border: 1px solid rgba(245, 158, 11, 0.28);
+      background: rgba(28, 25, 23, 0.78);
+      color: #cbd5e1;
+      padding: .72rem .9rem;
+      font-size: .84rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      transition: transform .14s ease, background .14s ease, color .14s ease, border-color .14s ease, box-shadow .14s ease;
+    }
+    .tab-switch-btn.active {
+      color: #fef3c7;
+      background: linear-gradient(180deg, rgba(185, 28, 28, 0.92), rgba(120, 15, 15, 0.94));
+      border-color: rgba(252, 211, 77, 0.6);
+      box-shadow: 0 8px 22px rgba(127, 29, 29, 0.34);
+    }
+    .tab-switch-btn:active { transform: scale(.98); }
+
+    #tab-page-freeze .freeze-info-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .28rem .65rem;
+      border-radius: 9999px;
+      font-size: 11px;
+      border: 1px solid rgba(125, 211, 252, .22);
+      background: rgba(8, 47, 73, .34);
+      color: #bae6fd;
+    }
+    #freeze-stage {
+      position: relative;
+      width: 100%;
+      min-height: 365px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 2px solid rgba(71, 85, 105, .85);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(125,211,252,.12), transparent 40%),
+        linear-gradient(180deg, rgba(7,12,20,1) 0%, rgba(7,15,28,1) 52%, rgba(11,20,38,1) 100%);
+      box-shadow: inset 0 2px 16px rgba(255,255,255,.04), inset 0 -16px 28px rgba(0,0,0,.6), 0 12px 30px rgba(0,0,0,.35);
+      isolation: isolate;
+    }
+    #freeze-stage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 22% 18%, rgba(255,255,255,.16), transparent 18%),
+        radial-gradient(circle at 74% 12%, rgba(191,219,254,.1), transparent 20%),
+        linear-gradient(180deg, transparent 0%, rgba(12,74,110,.14) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    #freeze-stage.step-freezer::after,
+    #freeze-stage.step-frozen::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(186,230,253,.12), transparent 45%, rgba(125,211,252,.08) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .freeze-snow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity .35s ease;
+    }
+    #freeze-stage.step-freezer .freeze-snow,
+    #freeze-stage.step-frozen .freeze-snow { opacity: 1; }
+    .freeze-snow span {
+      position: absolute;
+      display: block;
+      width: 5px;
+      height: 5px;
+      border-radius: 9999px;
+      background: rgba(255,255,255,.86);
+      filter: blur(.2px);
+      animation: freezeFall linear infinite;
+    }
+    @keyframes freezeFall {
+      from { transform: translateY(-12px) translateX(0) scale(1); opacity: 0; }
+      10% { opacity: .9; }
+      to { transform: translateY(245px) translateX(14px) scale(.72); opacity: 0; }
+    }
+    #freeze-freezer-door {
+      position: absolute;
+      inset: 16px;
+      border-radius: 24px;
+      border: 1px solid rgba(148, 163, 184, .22);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+      pointer-events: none;
+      z-index: 1;
+    }
+    #freeze-bottle-wrapper {
+      position: relative;
+      z-index: 3;
+      width: min(78vw, 220px);
+      max-width: 220px;
+      height: 286px;
+      margin: 52px auto 0;
+    }
+    #freeze-bottle-cap {
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 64px;
+      height: 22px;
+      border-radius: 9px 9px 4px 4px;
+      background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+      border: 2px solid rgba(219, 234, 254, .34);
+      box-shadow: 0 3px 10px rgba(0,0,0,.26);
+    }
+    #freeze-bottle {
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 198px;
+      height: 250px;
+      border-radius: 26px 26px 32px 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,.22) 0%, rgba(191,219,254,.14) 28%, rgba(125,211,252,.09) 100%);
+      border: 3px solid rgba(226,232,240,.52);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.18), inset 0 -18px 30px rgba(2,132,199,.08), 0 15px 30px rgba(2,6,23,.33);
+      overflow: hidden;
+      backdrop-filter: blur(2px);
+    }
+    #freeze-bottle::before {
+      content: '';
+      position: absolute;
+      inset: 12px 16px 12px 16px;
+      border-radius: 20px 20px 28px 28px;
+      border: 1px solid rgba(255,255,255,.18);
+      pointer-events: none;
+    }
+    #freeze-water {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 12px;
+      height: 0%;
+      border-radius: 18px 18px 24px 24px;
+      background: linear-gradient(180deg, rgba(125,211,252,.18) 0%, rgba(56,189,248,.58) 46%, rgba(2,132,199,.78) 100%);
+      box-shadow: inset 0 10px 18px rgba(255,255,255,.14), inset 0 -8px 18px rgba(7,89,133,.2);
+      transition: height .9s cubic-bezier(.22, 1, .36, 1), opacity .45s ease;
+      opacity: .94;
+      overflow: hidden;
+    }
+    #freeze-water::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 12px;
+      background: radial-gradient(circle at 30% 50%, rgba(255,255,255,.55), transparent 18%), radial-gradient(circle at 70% 30%, rgba(255,255,255,.36), transparent 18%), rgba(255,255,255,.16);
+      filter: blur(.4px);
+    }
+    #freeze-stage.step-filled #freeze-water,
+    #freeze-stage.step-freezer #freeze-water,
+    #freeze-stage.step-frozen #freeze-water { height: 72%; }
+    #freeze-villain {
+      position: absolute;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      width: 112px;
+      height: 166px;
+      opacity: 0;
+      transition: transform .42s ease, opacity .32s ease, filter .42s ease;
+      z-index: 2;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,.32));
+    }
+    #freeze-stage.step-inserted #freeze-villain,
+    #freeze-stage.step-filled #freeze-villain,
+    #freeze-stage.step-freezer #freeze-villain,
+    #freeze-stage.step-frozen #freeze-villain { opacity: 1; }
+    #freeze-stage.step-filled #freeze-villain { transform: translateX(-50%) translateY(-8px); }
+    #freeze-stage.step-freezer #freeze-villain { filter: saturate(.75) brightness(.95) hue-rotate(165deg) drop-shadow(0 8px 12px rgba(56,189,248,.24)); }
+    #freeze-stage.step-frozen #freeze-villain {
+      transform: translateX(-50%) translateY(-10px) scale(.985);
+      filter: saturate(.42) brightness(.96) hue-rotate(175deg) contrast(1.08) drop-shadow(0 10px 18px rgba(56,189,248,.32));
+    }
+    #freeze-stage.step-frozen #freeze-villain { animation: frozenShiver .9s ease-in-out infinite; }
+    @keyframes frozenShiver {
+      0%,100% { transform: translateX(-50%) translateY(-10px) rotate(0deg) scale(.985); }
+      25% { transform: translateX(-50%) translateY(-10px) rotate(-1.2deg) scale(.985); }
+      75% { transform: translateX(-50%) translateY(-10px) rotate(1.1deg) scale(.985); }
+    }
+    #freeze-paper {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #f6e0a3 0%, #e8cc82 55%, #d6b86a 100%);
+      clip-path: path('M56 5 C71 5 82 17 82 31 C82 42 76 50 68 54 L99 63 L103 78 L76 76 L78 114 L91 158 L73 160 L61 120 L51 120 L39 160 L21 158 L34 114 L36 76 L9 78 L13 63 L44 54 C36 50 30 42 30 31 C30 17 41 5 56 5 Z');
+      box-shadow: inset 0 0 0 2px #6b4b1a;
+    }
+    #freeze-paper::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 57px;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 58px;
+      background: rgba(107, 70, 22, .45);
+      border-right: 1px dashed rgba(124, 45, 18, .3);
+    }
+    #freeze-face-orb {
+      position: absolute;
+      top: 13px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 39px;
+      height: 39px;
+      border-radius: 9999px;
+      background: radial-gradient(circle at 40% 30%, #fff8de 0%, #ecd58b 74%, #d2ad59 100%);
+      border: 2px solid rgba(110, 76, 24, .75);
+      overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(255,255,255,.28);
+    }
+    #freeze-default-face {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2b1d13;
+      font-size: 18px;
+      line-height: 1;
+    }
+    #freeze-photo-frame {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      overflow: hidden;
+      display: none;
+    }
+    #freeze-photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+    #freeze-name-label {
+      position: absolute;
+      left: 50%;
+      top: 78px;
+      transform: translateX(-50%);
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      font-family: 'Noto Serif TC', 'PMingLiU', serif;
+      font-weight: 900;
+      font-size: 12px;
+      color: #2b2417;
+      letter-spacing: .13em;
+      max-height: 56px;
+      overflow: hidden;
+      line-height: 1;
+    }
+    #freeze-ice {
+      position: absolute;
+      inset: 12px 14px 12px 14px;
+      border-radius: 18px 18px 24px 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,.42) 0%, rgba(224,242,254,.24) 32%, rgba(186,230,253,.18) 100%);
+      box-shadow: inset 0 0 26px rgba(255,255,255,.18), inset 0 0 65px rgba(191,219,254,.18);
+      opacity: 0;
+      transform: scaleY(.2);
+      transform-origin: bottom center;
+      transition: opacity .55s ease, transform .8s cubic-bezier(.22, 1, .36, 1);
+      overflow: hidden;
+      z-index: 3;
+      pointer-events: none;
+    }
+    #freeze-ice::before,
+    #freeze-ice::after {
+      content: '';
+      position: absolute;
+      inset: auto 8% 0 8%;
+      height: 100%;
+      background:
+        linear-gradient(135deg, transparent 0 16%, rgba(255,255,255,.28) 16% 18%, transparent 18% 34%, rgba(255,255,255,.18) 34% 36%, transparent 36%),
+        radial-gradient(circle at 25% 32%, rgba(255,255,255,.32), transparent 12%),
+        radial-gradient(circle at 73% 56%, rgba(255,255,255,.26), transparent 10%);
+      opacity: .9;
+      pointer-events: none;
+    }
+    #freeze-stage.step-frozen #freeze-ice { opacity: 1; transform: scaleY(1); }
+    #freeze-frost {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(255,255,255,.44), transparent 18%),
+        radial-gradient(circle at 72% 28%, rgba(255,255,255,.28), transparent 20%),
+        linear-gradient(180deg, rgba(255,255,255,.10), transparent 30%, rgba(186,230,253,.12) 100%);
+      opacity: 0;
+      transition: opacity .45s ease;
+      z-index: 4;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+    #freeze-frost::before, #freeze-frost::after {
+      content: '';
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(1px);
+      background: rgba(255,255,255,.45);
+      opacity: .8;
+    }
+    #freeze-frost::before { width: 120px; height: 120px; top: -20px; left: -14px; }
+    #freeze-frost::after { width: 140px; height: 140px; right: -30px; bottom: -34px; }
+    #freeze-stage.step-freezer #freeze-frost,
+    #freeze-stage.step-frozen #freeze-frost { opacity: .7; }
+    #freeze-stage.step-frozen #freeze-frost { opacity: .95; }
+    #freeze-outside-note {
+      position: absolute;
+      left: 50%;
+      bottom: 12px;
+      transform: translateX(-50%);
+      z-index: 4;
+      padding: .35rem .78rem;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, .82);
+      border: 1px solid rgba(148, 163, 184, .22);
+      color: #e2e8f0;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    #freeze-stage.step-filled #freeze-outside-note,
+    #freeze-stage.step-freezer #freeze-outside-note,
+    #freeze-stage.step-frozen #freeze-outside-note { bottom: auto; top: 18px; }
+    .freeze-action-btn {
+      border-radius: 16px;
+      border: 1px solid rgba(125, 211, 252, .22);
+      background: linear-gradient(180deg, rgba(15,23,42,.98), rgba(12,18,31,.98));
+      color: #e0f2fe;
+      padding: .9rem .8rem;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .03em;
+      box-shadow: 0 8px 18px rgba(2,6,23,.25);
+      transition: transform .14s ease, opacity .14s ease, border-color .14s ease, background .14s ease;
+    }
+    .freeze-action-btn:not(:disabled):active { transform: scale(.98); }
+    .freeze-action-btn:disabled { opacity: .42; }
+    .freeze-action-btn.primary {
+      background: linear-gradient(180deg, rgba(30,64,175,.96), rgba(30,41,129,.98));
+      border-color: rgba(147,197,253,.45);
+      color: #eff6ff;
+    }
+
   </style>
   <!-- Google Fonts: Traditional Serif & Clean Sans for Hong Kong Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2088,6 +2443,16 @@
       </p>
     </header>
 
+    <!-- 分頁切換：打小人 / 冰封詛咒 -->
+    <section class="rounded-2xl border border-stone-700/60 bg-stone-900/82 p-1.5 shadow-md">
+      <div class="flex items-center gap-2">
+        <button id="tab-hit-btn" type="button" class="tab-switch-btn active" aria-pressed="true">👟 打小人</button>
+        <button id="tab-freeze-btn" type="button" class="tab-switch-btn" aria-pressed="false">🧊 冰封詛咒</button>
+      </div>
+    </section>
+
+    <div id="tab-page-hit" class="flex flex-col gap-3.5">
+
     <!-- 1. 小人設定區 (姓名 + 上傳相片) -->
     <section class="rounded-2xl border border-stone-700/60 bg-stone-900/80 backdrop-blur-sm p-3.5 shadow-md">
       <div class="flex items-center justify-between mb-2.5">
@@ -2485,6 +2850,79 @@
       </div>
     </section>
 
+    </div>
+
+    <section id="tab-page-freeze" class="hidden flex-col gap-3.5">
+      <section class="rounded-2xl border border-sky-900/55 bg-slate-950/85 backdrop-blur-sm p-3.5 shadow-lg flex flex-col gap-3">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <h2 class="font-brush text-base font-bold text-sky-300 tracking-wider flex items-center gap-1.5">
+              <span>🧊</span> 水瓶冰封小人
+            </h2>
+            <p class="text-[11px] text-slate-300/80 mt-0.5">
+              民俗傳說玩法：把小人放進滿水瓶內，再送入雪櫃冰封，象徵封住是非與口舌。
+            </p>
+          </div>
+          <span class="freeze-info-chip">❄️ 純屬趣味互動</span>
+        </div>
+
+        <div class="rounded-2xl border border-sky-900/40 bg-slate-900/70 px-3 py-2.5">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <div class="text-[11px] text-slate-400">目前步驟</div>
+              <div id="freeze-step-label" class="mt-0.5 font-brush text-lg font-black text-sky-200">未開始</div>
+            </div>
+            <div class="text-right">
+              <div class="text-[11px] text-slate-400">瓶內溫度</div>
+              <div id="freeze-temp" class="mt-0.5 text-sm font-black text-cyan-200">24°C</div>
+            </div>
+          </div>
+          <p id="freeze-status" class="mt-2 text-[11px] leading-relaxed text-slate-300/90">先將第一頁設定的小人放入水瓶，之後逐步注水、入雪櫃、冰封。</p>
+          <div class="mt-2 h-3 rounded-full bg-slate-950 border border-slate-700/80 p-0.5 overflow-hidden">
+            <div id="freeze-progress-bar" class="h-full w-0 rounded-full bg-gradient-to-r from-cyan-600 via-sky-400 to-blue-300 transition-all duration-500"></div>
+          </div>
+        </div>
+
+        <div id="freeze-stage" class="relative">
+          <div id="freeze-freezer-door"></div>
+          <div class="freeze-snow" aria-hidden="true">
+            <span style="left:12%; top:8%; animation-duration:3.3s; animation-delay:.2s"></span>
+            <span style="left:24%; top:14%; animation-duration:4.2s; animation-delay:.8s"></span>
+            <span style="left:38%; top:6%; animation-duration:3.7s; animation-delay:1.1s"></span>
+            <span style="left:53%; top:12%; animation-duration:4.6s; animation-delay:.4s"></span>
+            <span style="left:66%; top:8%; animation-duration:3.9s; animation-delay:1.7s"></span>
+            <span style="left:78%; top:16%; animation-duration:4.4s; animation-delay:.6s"></span>
+            <span style="left:88%; top:9%; animation-duration:3.2s; animation-delay:1.3s"></span>
+          </div>
+          <div id="freeze-bottle-wrapper">
+            <div id="freeze-bottle-cap"></div>
+            <div id="freeze-bottle">
+              <div id="freeze-water"></div>
+              <div id="freeze-villain">
+                <div id="freeze-paper"></div>
+                <div id="freeze-face-orb">
+                  <div id="freeze-default-face">😵</div>
+                  <div id="freeze-photo-frame"><img id="freeze-photo-img" alt="冰封小人相片"></div>
+                </div>
+                <div id="freeze-name-label">是非小人</div>
+              </div>
+              <div id="freeze-ice"></div>
+              <div id="freeze-frost"></div>
+            </div>
+          </div>
+          <div id="freeze-outside-note">未入樽</div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <button id="freeze-insert-btn" type="button" class="freeze-action-btn primary">1. 放入水瓶</button>
+          <button id="freeze-fill-btn" type="button" class="freeze-action-btn">2. 注滿清水</button>
+          <button id="freeze-fridge-btn" type="button" class="freeze-action-btn">3. 送入雪櫃</button>
+          <button id="freeze-freeze-btn" type="button" class="freeze-action-btn">4. 冰封小人</button>
+        </div>
+        <button id="freeze-reset-btn" type="button" class="w-full rounded-2xl border border-slate-700/80 bg-slate-900/90 py-3 text-sm font-bold text-slate-200 transition active:scale-[0.98]">重新開始冰封儀式</button>
+      </section>
+    </section>
+
     <!-- 頁尾註明 -->
     <footer class="text-center text-[11px] text-stone-500 pb-4">
       純屬香港傳統民俗趣味減壓體驗 · 祝你小人遠離、貴人常伴 🧧
@@ -2569,7 +3007,9 @@
         isBurning: false,
         cantoneseVoice: null,
         audioCtx: null,
-        lastSubtitleTime: 0
+        lastSubtitleTime: 0,
+        currentTab: 'hit',
+        freezeStep: 0
       };
 
       // -----------------------------------------------------------------------
@@ -2629,6 +3069,24 @@
         clearAllCursesBtn: document.getElementById('clear-all-curses'),
         customCurseInput: document.getElementById('custom-curse-input'),
         addCustomCurseBtn: document.getElementById('add-custom-curse-btn'),
+        tabHitBtn: document.getElementById('tab-hit-btn'),
+        tabFreezeBtn: document.getElementById('tab-freeze-btn'),
+        tabPageHit: document.getElementById('tab-page-hit'),
+        tabPageFreeze: document.getElementById('tab-page-freeze'),
+        freezeStage: document.getElementById('freeze-stage'),
+        freezeStepLabel: document.getElementById('freeze-step-label'),
+        freezeTemp: document.getElementById('freeze-temp'),
+        freezeStatus: document.getElementById('freeze-status'),
+        freezeProgressBar: document.getElementById('freeze-progress-bar'),
+        freezeOutsideNote: document.getElementById('freeze-outside-note'),
+        freezeNameLabel: document.getElementById('freeze-name-label'),
+        freezePhotoFrame: document.getElementById('freeze-photo-frame'),
+        freezePhotoImg: document.getElementById('freeze-photo-img'),
+        freezeInsertBtn: document.getElementById('freeze-insert-btn'),
+        freezeFillBtn: document.getElementById('freeze-fill-btn'),
+        freezeFridgeBtn: document.getElementById('freeze-fridge-btn'),
+        freezeFreezeBtn: document.getElementById('freeze-freeze-btn'),
+        freezeResetBtn: document.getElementById('freeze-reset-btn'),
         toastBox: document.getElementById('toast-box'),
         toastText: document.getElementById('toast-text'),
         blessingModal: document.getElementById('blessing-modal'),
@@ -3186,6 +3644,156 @@
         showToast('已換上新紙小人，隨時可以再打！');
       }
 
+
+      const FREEZE_STAGE_META = [
+        {
+          label: '未開始',
+          temp: '24°C',
+          note: '未入樽',
+          status: '先將第一頁設定的小人放入水瓶，之後逐步注水、入雪櫃、冰封。',
+          progress: '0%'
+        },
+        {
+          label: '已放入水瓶',
+          temp: '24°C',
+          note: '小人已入樽',
+          status: '小人已經放入水瓶，下一步可以注滿清水，準備封住是非口舌。',
+          progress: '25%'
+        },
+        {
+          label: '已注滿清水',
+          temp: '19°C',
+          note: '滿水靜置',
+          status: '水已注滿，小人被困在瓶中；再把水瓶送進雪櫃，等寒氣滲透。',
+          progress: '55%'
+        },
+        {
+          label: '已送入雪櫃',
+          temp: '-6°C',
+          note: '雪櫃冷藏中',
+          status: '寒氣四起，瓶內開始結霜。最後一步就可以正式冰封小人。',
+          progress: '78%'
+        },
+        {
+          label: '冰封完成',
+          temp: '-18°C',
+          note: '冰封鎮壓',
+          status: '小人已被冰封鎮住，象徵凍結是非、封住口舌。若想重來，可重新開始冰封儀式。',
+          progress: '100%'
+        }
+      ];
+
+      function showPanel(el, show) {
+        if (!el) return;
+        if (show) {
+          el.classList.remove('hidden');
+          el.classList.add('flex');
+        } else {
+          el.classList.add('hidden');
+          el.classList.remove('flex');
+        }
+      }
+
+      function switchTab(tab) {
+        state.currentTab = tab === 'freeze' ? 'freeze' : 'hit';
+        const onHit = state.currentTab === 'hit';
+        showPanel(dom.tabPageHit, onHit);
+        showPanel(dom.tabPageFreeze, !onHit);
+        dom.tabHitBtn.classList.toggle('active', onHit);
+        dom.tabFreezeBtn.classList.toggle('active', !onHit);
+        dom.tabHitBtn.setAttribute('aria-pressed', onHit ? 'true' : 'false');
+        dom.tabFreezeBtn.setAttribute('aria-pressed', onHit ? 'false' : 'true');
+        if (!onHit) syncFreezeVillain();
+      }
+
+      function syncFreezeVillain() {
+        const trimmed = state.targetName.trim();
+        dom.freezeNameLabel.textContent = trimmed || '是非小人';
+        const src = dom.uploadedPhotoImg.getAttribute('src') || '';
+        if (src) {
+          dom.freezePhotoImg.src = src;
+          dom.freezePhotoFrame.style.display = 'block';
+        } else {
+          dom.freezePhotoImg.src = '';
+          dom.freezePhotoFrame.style.display = 'none';
+        }
+      }
+
+      function updateFreezeButtons() {
+        const step = state.freezeStep;
+        dom.freezeInsertBtn.disabled = step >= 1;
+        dom.freezeFillBtn.disabled = step < 1 || step >= 2;
+        dom.freezeFridgeBtn.disabled = step < 2 || step >= 3;
+        dom.freezeFreezeBtn.disabled = step < 3 || step >= 4;
+      }
+
+      function updateFreezeStage() {
+        const step = state.freezeStep;
+        const meta = FREEZE_STAGE_META[Math.max(0, Math.min(FREEZE_STAGE_META.length - 1, step))];
+        dom.freezeStage.classList.toggle('step-inserted', step >= 1);
+        dom.freezeStage.classList.toggle('step-filled', step >= 2);
+        dom.freezeStage.classList.toggle('step-freezer', step >= 3);
+        dom.freezeStage.classList.toggle('step-frozen', step >= 4);
+        dom.freezeStepLabel.textContent = meta.label;
+        dom.freezeTemp.textContent = meta.temp;
+        dom.freezeStatus.textContent = meta.status;
+        dom.freezeOutsideNote.textContent = meta.note;
+        dom.freezeProgressBar.style.width = meta.progress;
+        updateFreezeButtons();
+      }
+
+      function setFreezeStep(step) {
+        state.freezeStep = step;
+        updateFreezeStage();
+      }
+
+      function resetFreezeCurse(silent = false) {
+        setFreezeStep(0);
+        if (!silent) showToast('已重置冰封儀式，可以由頭再封過。');
+      }
+
+      function runFreezeAction(action) {
+        syncFreezeVillain();
+        switch (action) {
+          case 'insert':
+            if (state.freezeStep >= 1) return;
+            setFreezeStep(1);
+            showToast('小人已放入水瓶');
+            break;
+          case 'fill':
+            if (state.freezeStep < 1) {
+              showToast('請先把小人放入水瓶');
+              return;
+            }
+            if (state.freezeStep >= 2) return;
+            setFreezeStep(2);
+            showToast('已注滿清水');
+            break;
+          case 'fridge':
+            if (state.freezeStep < 2) {
+              showToast('請先注滿清水');
+              return;
+            }
+            if (state.freezeStep >= 3) return;
+            setFreezeStep(3);
+            showToast('水瓶已送入雪櫃');
+            break;
+          case 'freeze':
+            if (state.freezeStep < 3) {
+              showToast('請先將水瓶送入雪櫃');
+              return;
+            }
+            if (state.freezeStep >= 4) return;
+            setFreezeStep(4);
+            if (navigator.vibrate) {
+              try { navigator.vibrate([50, 40, 50, 40, 90]); } catch (e) {}
+            }
+            speakCurseIfReady('以水為牢，以冰封形，冰封小人，凍結是非口舌！', true);
+            showToast('冰封完成！小人已被凍住');
+            break;
+        }
+      }
+
       // -----------------------------------------------------------------------
       // 12. 咒語列表渲染與互動管理
       // -----------------------------------------------------------------------
@@ -3261,6 +3869,7 @@
           const responsiveFont = Math.min(16, Math.max(12, window.innerWidth * 0.037));
           const fitFont = trimmed.length >= 6 ? 12 : trimmed.length >= 4 ? 14 : 16;
           dom.villainNameDisplay.style.fontSize = `${Math.min(responsiveFont, fitFont)}px`;
+          syncFreezeVillain();
         });
 
         // 手機原生選檔：支援相簿與相機圖片，先檢查載入成功，再放進頭像。
@@ -3328,6 +3937,7 @@
               dom.removePhotoBtn.classList.remove('hidden');
               dom.removePhotoBtn.classList.add('inline-flex');
               dom.photoUploadStatus.textContent = `已套用相片：${file.name}`;
+              syncFreezeVillain();
               showToast('相片已成功套入小人頭像！');
             };
             dom.uploadedPhotoImg.onerror = fail;
@@ -3346,6 +3956,7 @@
           dom.removePhotoBtn.classList.remove('inline-flex');
           dom.photoUploadInput.value = '';
           dom.photoUploadStatus.textContent = '相片已移除，可重新選擇。';
+          syncFreezeVillain();
           showToast('已還原預設紙小人頭像');
         });
 
@@ -3391,6 +4002,15 @@
           showToast(state.voiceEnabled ? '已開啟廣東話唸咒' : '已關閉廣東話唸咒');
         });
 
+        // 分頁切換與冰封儀式
+        dom.tabHitBtn.addEventListener('click', () => switchTab('hit'));
+        dom.tabFreezeBtn.addEventListener('click', () => switchTab('freeze'));
+        dom.freezeInsertBtn.addEventListener('click', () => runFreezeAction('insert'));
+        dom.freezeFillBtn.addEventListener('click', () => runFreezeAction('fill'));
+        dom.freezeFridgeBtn.addEventListener('click', () => runFreezeAction('fridge'));
+        dom.freezeFreezeBtn.addEventListener('click', () => runFreezeAction('freeze'));
+        dom.freezeResetBtn.addEventListener('click', () => resetFreezeCurse());
+
         // 咒語全選 / 清空 / 自訂加入
         dom.selectAllCursesBtn.addEventListener('click', () => {
           state.curses.forEach(c => { c.selected = true; });
@@ -3419,6 +4039,9 @@
         initEmbers();
         renderCurseList();
         renderPainEvolution(false);
+        syncFreezeVillain();
+        updateFreezeStage();
+        switchTab('hit');
         updateShoeStrikeTarget();
         window.addEventListener('resize', updateShoeStrikeTarget, { passive: true });
         bindEvents();
