@@ -1989,6 +1989,219 @@
       color: #eff6ff;
     }
 
+  
+
+    /* ==========================================================================
+       厭勝術刺札頁
+       ========================================================================== */
+    #tab-page-yan .yan-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .28rem .65rem;
+      border-radius: 9999px;
+      font-size: 11px;
+      border: 1px solid rgba(251, 191, 36, .22);
+      background: rgba(69, 26, 3, .34);
+      color: #fde68a;
+    }
+    #yan-stage {
+      position: relative;
+      min-height: 420px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 2px solid rgba(120, 53, 15, .72);
+      background:
+        radial-gradient(circle at 50% 12%, rgba(251, 191, 36, .08), transparent 28%),
+        linear-gradient(180deg, rgba(38, 18, 10, 1) 0%, rgba(28, 12, 8, 1) 48%, rgba(21, 10, 7, 1) 100%);
+      box-shadow: inset 0 2px 12px rgba(255,255,255,.03), inset 0 -18px 28px rgba(0,0,0,.52), 0 14px 26px rgba(0,0,0,.35);
+    }
+    #yan-stage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 22% 22%, rgba(255,255,255,.03), transparent 16%),
+        radial-gradient(circle at 75% 25%, rgba(251,191,36,.04), transparent 18%),
+        linear-gradient(transparent 0 84%, rgba(0,0,0,.18) 84% 100%);
+      pointer-events: none;
+    }
+    #yan-stage::after {
+      content: '';
+      position: absolute;
+      inset: 14px;
+      border-radius: 24px;
+      border: 1px solid rgba(180, 83, 9, .14);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+      pointer-events: none;
+    }
+    #yan-incense-smoke {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: .68;
+      background:
+        radial-gradient(circle at 28% 18%, rgba(255,255,255,.08), transparent 18%),
+        radial-gradient(circle at 56% 10%, rgba(255,255,255,.06), transparent 18%),
+        radial-gradient(circle at 78% 22%, rgba(255,255,255,.05), transparent 16%);
+      filter: blur(10px);
+    }
+    #yan-doll-wrap {
+      position: relative;
+      width: min(80vw, 242px);
+      height: 318px;
+      margin: 54px auto 0;
+      z-index: 2;
+    }
+    #yan-doll {
+      position: absolute;
+      inset: 0;
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,.35));
+      transform-origin: center center;
+      transition: transform .12s ease;
+    }
+    #yan-doll.stabbed { transform: scale(.985) rotate(-1.1deg); }
+    #yan-straw-svg { width: 100%; height: 100%; }
+    #yan-name-paper {
+      position: absolute;
+      left: 50%;
+      top: 136px;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 56px;
+      min-height: 82px;
+      border-radius: 6px;
+      background: linear-gradient(180deg, #f8e8b5 0%, #efd089 100%);
+      border: 2px solid rgba(120, 53, 15, .68);
+      box-shadow: 0 4px 14px rgba(0,0,0,.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 6px;
+      z-index: 3;
+    }
+    #yan-name-paper::before {
+      content: '符';
+      position: absolute;
+      top: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      font-weight: 900;
+      color: #b91c1c;
+      opacity: .75;
+      letter-spacing: .12em;
+    }
+    #yan-name-text {
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      font-family: 'Noto Serif TC', 'PMingLiU', serif;
+      font-size: 13px;
+      line-height: 1;
+      font-weight: 900;
+      color: #2a1b14;
+      letter-spacing: .12em;
+      max-height: 64px;
+      overflow: hidden;
+    }
+    #yan-pin-board {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+    }
+    .yan-carrot {
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      border: none;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      transition: transform .12s ease, filter .12s ease, opacity .16s ease;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,.28));
+      touch-action: manipulation;
+    }
+    .yan-carrot:active { transform: translate(-50%, -50%) scale(.92) rotate(-8deg); }
+    .yan-carrot.hit {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(.6) rotate(20deg);
+      pointer-events: none;
+    }
+    .yan-carrot svg { width: 100%; height: 100%; display: block; }
+    .yan-pin-mark {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 6;
+      animation: pinFlash .55s ease-out forwards;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,.32));
+    }
+    @keyframes pinFlash {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(.42) rotate(-18deg); }
+      30% { opacity: 1; transform: translate(-50%, -50%) scale(1.08) rotate(0deg); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(.82) translateY(-10px) rotate(12deg); }
+    }
+    .yan-ouch {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 7;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: #fca5a5;
+      text-shadow: 0 2px 0 #7f1d1d, 0 6px 12px rgba(0,0,0,.35);
+      animation: yanOuch 0.7s ease-out forwards;
+    }
+    @keyframes yanOuch {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(.4); }
+      25% { opacity: 1; transform: translate(-50%, -70%) scale(1.1); }
+      100% { opacity: 0; transform: translate(-50%, -120%) scale(.85); }
+    }
+    #yan-stage-badge {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      z-index: 6;
+      border-radius: 9999px;
+      border: 1px solid rgba(251, 191, 36, .24);
+      background: rgba(17, 24, 39, .72);
+      padding: .32rem .72rem;
+      font-size: 11px;
+      font-weight: 900;
+      color: #fde68a;
+    }
+    #yan-bottom-note {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      z-index: 6;
+      white-space: nowrap;
+      max-width: calc(100% - 30px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border-radius: 9999px;
+      border: 1px solid rgba(120,53,15,.36);
+      background: rgba(17,24,39,.7);
+      color: #f5deb3;
+      font-size: 11px;
+      padding: .38rem .82rem;
+    }
+    .yan-control-btn {
+      border-radius: 16px;
+      padding: .92rem .85rem;
+      font-size: .84rem;
+      font-weight: 800;
+      letter-spacing: .03em;
+      transition: transform .14s ease, opacity .14s ease, background .14s ease;
+    }
+    .yan-control-btn:active { transform: scale(.98); }
+
   </style>
   <!-- Google Fonts: Traditional Serif & Clean Sans for Hong Kong Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2445,9 +2658,10 @@
 
     <!-- 分頁切換：打小人 / 冰封詛咒 -->
     <section class="rounded-2xl border border-stone-700/60 bg-stone-900/82 p-1.5 shadow-md">
-      <div class="flex items-center gap-2">
+      <div class="grid grid-cols-3 gap-2">
         <button id="tab-hit-btn" type="button" class="tab-switch-btn active" aria-pressed="true">👟 打小人</button>
         <button id="tab-freeze-btn" type="button" class="tab-switch-btn" aria-pressed="false">🧊 冰封詛咒</button>
+        <button id="tab-yan-btn" type="button" class="tab-switch-btn" aria-pressed="false">🪵 厭勝術</button>
       </div>
     </section>
 
@@ -2923,6 +3137,87 @@
       </section>
     </section>
 
+    <section id="tab-page-yan" class="hidden flex-col gap-3.5">
+      <section class="rounded-2xl border border-amber-900/55 bg-stone-950/88 backdrop-blur-sm p-3.5 shadow-lg flex flex-col gap-3">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <h2 class="font-brush text-base font-bold text-amber-300 tracking-wider flex items-center gap-1.5">
+              <span>🪵</span> 厭勝術刺札
+            </h2>
+            <p class="text-[11px] text-stone-300/80 mt-0.5">
+              以填名紙貼上稻草木偶，再進行刺札。木偶身上會隨機生出紅蘿蔔，你可不停去刺。
+            </p>
+          </div>
+          <span class="yan-chip">📍 可連續刺札</span>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2">
+          <div class="rounded-2xl border border-stone-700/70 bg-stone-900/80 px-3 py-2.5">
+            <div class="text-[11px] text-stone-400">刺札次數</div>
+            <div id="yan-stab-count" class="mt-0.5 font-brush text-2xl font-black text-amber-300 leading-none">0</div>
+          </div>
+          <div class="rounded-2xl border border-stone-700/70 bg-stone-900/80 px-3 py-2.5">
+            <div class="text-[11px] text-stone-400">怨氣值</div>
+            <div id="yan-curse-level" class="mt-0.5 text-sm font-black text-red-300">未起壇</div>
+          </div>
+          <div class="rounded-2xl border border-stone-700/70 bg-stone-900/80 px-3 py-2.5">
+            <div class="text-[11px] text-stone-400">現存紅蘿蔔</div>
+            <div id="yan-carrot-count" class="mt-0.5 text-sm font-black text-orange-300">0 / 0</div>
+          </div>
+        </div>
+
+        <div class="rounded-2xl border border-amber-900/35 bg-stone-900/70 px-3 py-2.5">
+          <p id="yan-status" class="text-[11px] leading-relaxed text-stone-300/90">先開始厭勝術，木偶身上就會隨機長出紅蘿蔔，逐粒刺落去即可。</p>
+          <div class="mt-2 h-3 rounded-full bg-stone-950 border border-stone-700/80 p-0.5 overflow-hidden">
+            <div id="yan-progress-bar" class="h-full w-0 rounded-full bg-gradient-to-r from-red-700 via-orange-500 to-amber-300 transition-all duration-300"></div>
+          </div>
+        </div>
+
+        <div id="yan-stage">
+          <div id="yan-incense-smoke"></div>
+          <div id="yan-stage-badge">🪡 待命</div>
+          <div id="yan-doll-wrap">
+            <div id="yan-doll">
+              <svg id="yan-straw-svg" viewBox="0 0 220 300" aria-hidden="true">
+                <defs>
+                  <linearGradient id="strawGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#f2d38a"/>
+                    <stop offset="100%" stop-color="#b88a44"/>
+                  </linearGradient>
+                </defs>
+                <g stroke="#7c4a12" stroke-linecap="round" stroke-width="10">
+                  <path d="M110 32 L110 250"/>
+                  <path d="M56 96 L164 96"/>
+                  <path d="M108 162 L58 250"/>
+                  <path d="M112 162 L162 250"/>
+                </g>
+                <g fill="url(#strawGrad)" stroke="#8a5b22" stroke-width="2.5">
+                  <circle cx="110" cy="52" r="33"/>
+                  <ellipse cx="110" cy="134" rx="47" ry="48"/>
+                  <ellipse cx="55" cy="97" rx="17" ry="18"/>
+                  <ellipse cx="165" cy="97" rx="17" ry="18"/>
+                  <ellipse cx="64" cy="254" rx="16" ry="19"/>
+                  <ellipse cx="156" cy="254" rx="16" ry="19"/>
+                </g>
+                <g stroke="#f6e1b2" stroke-width="2.3" opacity=".72">
+                  <path d="M87 36 L97 43 M132 35 L122 45 M92 117 L129 117 M86 140 L132 140 M97 165 L124 165"/>
+                  <path d="M44 89 L67 103 M153 101 L176 89 M55 235 L73 252 M147 252 L164 235"/>
+                </g>
+              </svg>
+              <div id="yan-name-paper"><div id="yan-name-text">是非小人</div></div>
+              <div id="yan-pin-board"></div>
+            </div>
+          </div>
+          <div id="yan-bottom-note">木偶未起壇</div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <button id="yan-start-btn" type="button" class="yan-control-btn rounded-2xl border border-amber-500/40 bg-gradient-to-b from-red-700 to-red-900 text-amber-50 shadow-[0_8px_18px_rgba(127,29,29,.35)]">開始厭勝術</button>
+          <button id="yan-reset-btn" type="button" class="yan-control-btn rounded-2xl border border-stone-700/80 bg-stone-900/90 text-stone-200">重新擺壇</button>
+        </div>
+      </section>
+    </section>
+
     <!-- 頁尾註明 -->
     <footer class="text-center text-[11px] text-stone-500 pb-4">
       純屬香港傳統民俗趣味減壓體驗 · 祝你小人遠離、貴人常伴 🧧
@@ -3009,7 +3304,12 @@
         audioCtx: null,
         lastSubtitleTime: 0,
         currentTab: 'hit',
-        freezeStep: 0
+        freezeStep: 0,
+        yanActive: false,
+        yanStabCount: 0,
+        yanMaxCarrots: 4,
+        yanCarrotId: 0,
+        yanRespawnTimer: null
       };
 
       // -----------------------------------------------------------------------
@@ -3071,8 +3371,10 @@
         addCustomCurseBtn: document.getElementById('add-custom-curse-btn'),
         tabHitBtn: document.getElementById('tab-hit-btn'),
         tabFreezeBtn: document.getElementById('tab-freeze-btn'),
+        tabYanBtn: document.getElementById('tab-yan-btn'),
         tabPageHit: document.getElementById('tab-page-hit'),
         tabPageFreeze: document.getElementById('tab-page-freeze'),
+        tabPageYan: document.getElementById('tab-page-yan'),
         freezeStage: document.getElementById('freeze-stage'),
         freezeStepLabel: document.getElementById('freeze-step-label'),
         freezeTemp: document.getElementById('freeze-temp'),
@@ -3087,6 +3389,18 @@
         freezeFridgeBtn: document.getElementById('freeze-fridge-btn'),
         freezeFreezeBtn: document.getElementById('freeze-freeze-btn'),
         freezeResetBtn: document.getElementById('freeze-reset-btn'),
+        yanNameText: document.getElementById('yan-name-text'),
+        yanPinBoard: document.getElementById('yan-pin-board'),
+        yanDoll: document.getElementById('yan-doll'),
+        yanStageBadge: document.getElementById('yan-stage-badge'),
+        yanBottomNote: document.getElementById('yan-bottom-note'),
+        yanStatus: document.getElementById('yan-status'),
+        yanStabCount: document.getElementById('yan-stab-count'),
+        yanCurseLevel: document.getElementById('yan-curse-level'),
+        yanCarrotCount: document.getElementById('yan-carrot-count'),
+        yanProgressBar: document.getElementById('yan-progress-bar'),
+        yanStartBtn: document.getElementById('yan-start-btn'),
+        yanResetBtn: document.getElementById('yan-reset-btn'),
         toastBox: document.getElementById('toast-box'),
         toastText: document.getElementById('toast-text'),
         blessingModal: document.getElementById('blessing-modal'),
@@ -3695,15 +4009,21 @@
       }
 
       function switchTab(tab) {
-        state.currentTab = tab === 'freeze' ? 'freeze' : 'hit';
+        state.currentTab = tab === 'freeze' ? 'freeze' : tab === 'yan' ? 'yan' : 'hit';
         const onHit = state.currentTab === 'hit';
+        const onFreeze = state.currentTab === 'freeze';
+        const onYan = state.currentTab === 'yan';
         showPanel(dom.tabPageHit, onHit);
-        showPanel(dom.tabPageFreeze, !onHit);
+        showPanel(dom.tabPageFreeze, onFreeze);
+        showPanel(dom.tabPageYan, onYan);
         dom.tabHitBtn.classList.toggle('active', onHit);
-        dom.tabFreezeBtn.classList.toggle('active', !onHit);
+        dom.tabFreezeBtn.classList.toggle('active', onFreeze);
+        dom.tabYanBtn.classList.toggle('active', onYan);
         dom.tabHitBtn.setAttribute('aria-pressed', onHit ? 'true' : 'false');
-        dom.tabFreezeBtn.setAttribute('aria-pressed', onHit ? 'false' : 'true');
-        if (!onHit) syncFreezeVillain();
+        dom.tabFreezeBtn.setAttribute('aria-pressed', onFreeze ? 'true' : 'false');
+        dom.tabYanBtn.setAttribute('aria-pressed', onYan ? 'true' : 'false');
+        if (onFreeze) syncFreezeVillain();
+        if (onYan) syncYanName();
       }
 
       function syncFreezeVillain() {
@@ -3717,6 +4037,149 @@
           dom.freezePhotoImg.src = '';
           dom.freezePhotoFrame.style.display = 'none';
         }
+      }
+
+
+      function syncYanName() {
+        const trimmed = state.targetName.trim();
+        dom.yanNameText.textContent = trimmed || '是非小人';
+      }
+
+      const YAN_CARROT_SLOTS = [
+        { x: 50, y: 15 }, { x: 39, y: 19 }, { x: 61, y: 19 },
+        { x: 50, y: 34 }, { x: 39, y: 34 }, { x: 61, y: 34 },
+        { x: 28, y: 27 }, { x: 72, y: 27 },
+        { x: 36, y: 49 }, { x: 50, y: 50 }, { x: 64, y: 49 },
+        { x: 43, y: 63 }, { x: 57, y: 63 },
+        { x: 30, y: 74 }, { x: 70, y: 74 },
+        { x: 36, y: 86 }, { x: 64, y: 86 }
+      ];
+
+      function getYanCurseMeta() {
+        const count = state.yanStabCount;
+        if (count >= 36) return { label: '狠辣封穴', badge: '🩸 狂刺中', progress: 100, note: '木偶被刺得密密麻麻，怨氣已滿。', status: '你已連續刺札多次，紅蘿蔔仍會不斷在木偶身上冒出。', max: 6 };
+        if (count >= 22) return { label: '中術加深', badge: '🪡 中術深', progress: 75, note: '紅蘿蔔愈生愈快，繼續刺落去。', status: '木偶身上不斷長出新的紅蘿蔔，你可繼續逐粒刺下去。', max: 5 };
+        if (count >= 10) return { label: '煞氣漸盛', badge: '⚠️ 煞氣起', progress: 42, note: '木偶開始積聚煞氣。', status: '紅蘿蔔開始密集冒出，刺札節奏加快。', max: 4 };
+        if (count >= 1) return { label: '已起壇', badge: '📍 刺札中', progress: 16, note: '木偶已起壇，可連續刺札。', status: '紅蘿蔔已長出，逐粒刺下去，會在其他位置再生。', max: 4 };
+        return { label: '未起壇', badge: '🪵 待命', progress: 0, note: '木偶未起壇', status: '先開始厭勝術，木偶身上就會隨機長出紅蘿蔔，逐粒刺落去即可。', max: 4 };
+      }
+
+      function updateYanStatus() {
+        const meta = getYanCurseMeta();
+        state.yanMaxCarrots = meta.max;
+        dom.yanStabCount.textContent = String(state.yanStabCount);
+        dom.yanCurseLevel.textContent = meta.label;
+        dom.yanStageBadge.textContent = meta.badge;
+        dom.yanBottomNote.textContent = meta.note;
+        dom.yanStatus.textContent = meta.status;
+        dom.yanProgressBar.style.width = `${meta.progress}%`;
+        const activeCount = dom.yanPinBoard.querySelectorAll('.yan-carrot:not(.hit)').length;
+        dom.yanCarrotCount.textContent = `${activeCount} / ${state.yanMaxCarrots}`;
+        dom.yanStartBtn.textContent = state.yanActive ? '繼續刺札' : '開始厭勝術';
+      }
+
+      function usedYanSlotKeys() {
+        return new Set([...dom.yanPinBoard.querySelectorAll('.yan-carrot:not(.hit)')].map(el => el.dataset.slotKey));
+      }
+
+      function spawnYanCarrot() {
+        if (!state.yanActive) return;
+        const activeCount = dom.yanPinBoard.querySelectorAll('.yan-carrot:not(.hit)').length;
+        if (activeCount >= state.yanMaxCarrots) { updateYanStatus(); return; }
+        const used = usedYanSlotKeys();
+        const available = YAN_CARROT_SLOTS.filter(slot => !used.has(`${slot.x}-${slot.y}`));
+        if (!available.length) { updateYanStatus(); return; }
+        const slot = available[Math.floor(Math.random() * available.length)];
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'yan-carrot';
+        btn.setAttribute('aria-label', '刺札紅蘿蔔');
+        btn.dataset.slotKey = `${slot.x}-${slot.y}`;
+        btn.dataset.carrotId = String(state.yanCarrotId += 1);
+        btn.style.left = `${slot.x}%`;
+        btn.style.top = `${slot.y}%`;
+        btn.innerHTML = `
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <g transform="rotate(30 32 32)">
+              <path d="M36 7 C42 10 46 14 47 21 C42 19 39 17 35 13 Z" fill="#22c55e"/>
+              <path d="M29 9 C22 11 18 15 17 21 C22 19 25 17 29 13 Z" fill="#16a34a"/>
+              <path d="M25 17 C17 25 15 43 31 54 C47 43 47 24 39 17 Z" fill="#f97316" stroke="#c2410c" stroke-width="2.2"/>
+              <path d="M27 26 L35 26 M26 33 L36 33 M27 40 L34 40" stroke="#fdba74" stroke-width="2.2" stroke-linecap="round" opacity=".72"/>
+            </g>
+          </svg>`;
+        btn.addEventListener('click', () => stabYanCarrot(btn));
+        dom.yanPinBoard.appendChild(btn);
+        updateYanStatus();
+      }
+
+      function scheduleYanRespawn() {
+        if (!state.yanActive) return;
+        clearTimeout(state.yanRespawnTimer);
+        state.yanRespawnTimer = setTimeout(() => {
+          while (dom.yanPinBoard.querySelectorAll('.yan-carrot:not(.hit)').length < state.yanMaxCarrots) {
+            spawnYanCarrot();
+          }
+          updateYanStatus();
+        }, 240);
+      }
+
+      function spawnYanPinFx(x, y) {
+        const pin = document.createElement('div');
+        pin.className = 'yan-pin-mark';
+        pin.style.left = `${x}%`;
+        pin.style.top = `${y}%`;
+        pin.innerHTML = `<svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path d="M5 6 L18 19" stroke="#e5e7eb" stroke-width="3.2" stroke-linecap="round"/><path d="M18 19 L24 28" stroke="#cbd5e1" stroke-width="2.4" stroke-linecap="round"/><circle cx="6" cy="6" r="4" fill="#dc2626" stroke="#7f1d1d" stroke-width="1.2"/></svg>`;
+        dom.yanPinBoard.appendChild(pin);
+        setTimeout(() => pin.remove(), 560);
+
+        const ouch = document.createElement('div');
+        ouch.className = 'yan-ouch';
+        ouch.style.left = `${x}%`;
+        ouch.style.top = `${y}%`;
+        const words = ['刺！', '中！', '嗚呀！', '痛！'];
+        ouch.textContent = words[Math.floor(Math.random() * words.length)];
+        dom.yanPinBoard.appendChild(ouch);
+        setTimeout(() => ouch.remove(), 720);
+      }
+
+      function stabYanCarrot(btn) {
+        if (!state.yanActive || btn.classList.contains('hit')) return;
+        const x = parseFloat(btn.style.left);
+        const y = parseFloat(btn.style.top);
+        btn.classList.add('hit');
+        state.yanStabCount += 1;
+        dom.yanDoll.classList.remove('stabbed');
+        void dom.yanDoll.offsetWidth;
+        dom.yanDoll.classList.add('stabbed');
+        setTimeout(() => dom.yanDoll.classList.remove('stabbed'), 150);
+        spawnYanPinFx(x, y);
+        setTimeout(() => btn.remove(), 180);
+        if (navigator.vibrate) { try { navigator.vibrate(24); } catch(e) {} }
+        updateYanStatus();
+        scheduleYanRespawn();
+      }
+
+      function resetYanPage(silent = false) {
+        state.yanActive = false;
+        state.yanStabCount = 0;
+        state.yanMaxCarrots = 4;
+        clearTimeout(state.yanRespawnTimer);
+        state.yanRespawnTimer = null;
+        dom.yanPinBoard.innerHTML = '';
+        updateYanStatus();
+        if (!silent) showToast('已重新擺壇，可再做一次厭勝術。');
+      }
+
+      function startYanPage() {
+        syncYanName();
+        if (!state.yanActive) {
+          state.yanActive = true;
+          showToast('已開始厭勝術，紅蘿蔔出現！');
+        }
+        while (dom.yanPinBoard.querySelectorAll('.yan-carrot:not(.hit)').length < state.yanMaxCarrots) {
+          spawnYanCarrot();
+        }
+        updateYanStatus();
       }
 
       function updateFreezeButtons() {
@@ -3870,6 +4333,7 @@
           const fitFont = trimmed.length >= 6 ? 12 : trimmed.length >= 4 ? 14 : 16;
           dom.villainNameDisplay.style.fontSize = `${Math.min(responsiveFont, fitFont)}px`;
           syncFreezeVillain();
+          syncYanName();
         });
 
         // 手機原生選檔：支援相簿與相機圖片，先檢查載入成功，再放進頭像。
@@ -3938,6 +4402,7 @@
               dom.removePhotoBtn.classList.add('inline-flex');
               dom.photoUploadStatus.textContent = `已套用相片：${file.name}`;
               syncFreezeVillain();
+              syncYanName();
               showToast('相片已成功套入小人頭像！');
             };
             dom.uploadedPhotoImg.onerror = fail;
@@ -3957,6 +4422,7 @@
           dom.photoUploadInput.value = '';
           dom.photoUploadStatus.textContent = '相片已移除，可重新選擇。';
           syncFreezeVillain();
+          syncYanName();
           showToast('已還原預設紙小人頭像');
         });
 
@@ -4005,11 +4471,14 @@
         // 分頁切換與冰封儀式
         dom.tabHitBtn.addEventListener('click', () => switchTab('hit'));
         dom.tabFreezeBtn.addEventListener('click', () => switchTab('freeze'));
+        dom.tabYanBtn.addEventListener('click', () => switchTab('yan'));
         dom.freezeInsertBtn.addEventListener('click', () => runFreezeAction('insert'));
         dom.freezeFillBtn.addEventListener('click', () => runFreezeAction('fill'));
         dom.freezeFridgeBtn.addEventListener('click', () => runFreezeAction('fridge'));
         dom.freezeFreezeBtn.addEventListener('click', () => runFreezeAction('freeze'));
         dom.freezeResetBtn.addEventListener('click', () => resetFreezeCurse());
+        dom.yanStartBtn.addEventListener('click', startYanPage);
+        dom.yanResetBtn.addEventListener('click', () => resetYanPage());
 
         // 咒語全選 / 清空 / 自訂加入
         dom.selectAllCursesBtn.addEventListener('click', () => {
@@ -4040,7 +4509,9 @@
         renderCurseList();
         renderPainEvolution(false);
         syncFreezeVillain();
+        syncYanName();
         updateFreezeStage();
+        resetYanPage(true);
         switchTab('hit');
         updateShoeStrikeTarget();
         window.addEventListener('resize', updateShoeStrikeTarget, { passive: true });
